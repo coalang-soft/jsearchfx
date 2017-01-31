@@ -49,4 +49,16 @@ public class NodeSearch {
 		prepare.call(null);
 	}
 
+	@Override
+	public String toString() {
+		return "NodeSearch [node=" + node + ", prepare=" + prepare + "]";
+	}
+	
+	public boolean equals(Object other){
+		if(!(other instanceof NodeSearch)){
+			return false;
+		}
+		return node.equals(((NodeSearch) other).node);
+	}
+
 }

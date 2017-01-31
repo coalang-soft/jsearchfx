@@ -8,22 +8,21 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TitledPane;
 
 import io.github.coalangsoft.jsearch.JSearchEngine;
 import io.github.coalangsoft.lib.data.Func;
-import io.github.coalangsoft.lib.data.ImutablePair;
-import io.github.coalangsoft.lib.data.Pair;
 
 public class JSearchFX {
 	
 	private JSearchEngine<NodeSearch> engine;
 	private ArrayList<Func<Void,Void>> tabData;
+	private ArrayList<String> parentCategories;
 	
 	public JSearchEngine<NodeSearch> createSearchEngine(Node root){
 		engine = new JSearchEngine<NodeSearch>();
 		tabData = new ArrayList<Func<Void,Void>>();
+		parentCategories = new ArrayList<String>();
 		registerNode(root);
 		return engine;
 	}
@@ -31,6 +30,9 @@ public class JSearchFX {
 	private void registerNode(Node node) {
 		if(node == null){
 			return;
+		}
+		for(int i = 0; i < parentCategories.size(); i++){
+			engine.add(parentCategories.get(i), NodeSearch.create(node, tabData));
 		}
 		registerProperties(node);
 	}
@@ -75,8 +77,10 @@ public class JSearchFX {
 						return null;
 					}
 				});
+				parentCategories.add(t.getText());
 				registerNode(t.getContent());
 				tabData.remove(tabData.size() - 1);
+				parentCategories.remove(parentCategories.size() - 1);
 			}if(o instanceof TitledPane){
 				final TitledPane t = (TitledPane) o;
 				tabData.add(new Func<Void, Void>() {
@@ -86,8 +90,10 @@ public class JSearchFX {
 						return null;
 					}
 				});
+				parentCategories.add(t.getText());
 				registerNode(t.getContent());
 				tabData.remove(tabData.size() - 1);
+				parentCategories.remove(parentCategories.size() - 1);
 			}
 		}
 	}
