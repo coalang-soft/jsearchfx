@@ -7,11 +7,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import javafx.scene.Node;
-import javafx.scene.control.Menu;
-import javafx.scene.control.SelectionModel;
-import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 
 public class NodeSearch {
 
