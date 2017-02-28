@@ -1,5 +1,6 @@
 github coalang-soft jsearch
 github coalang-soft coalib-java
 dir-create ./jsearchfx/standalone-src
+dir-copy ./jsearchfx/src ./jsearchfx/standalone-src
 dir-copy ./jsearch/standalone-src ./jsearchfx/standalone-src
 dir-copy ./coalib-java/src ./jsearchfx/standalone-src
