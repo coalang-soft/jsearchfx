@@ -14,34 +14,37 @@ import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.Effect;
 
-public class AppSearchField extends TextField{
-	
+public class AppSearchField extends SearchField<NodeSearch>{
+
+	private final boolean focusSearch;
 	private JSearchEngine<NodeSearch> engine;
 
 	public AppSearchField(JSearchEngine<NodeSearch> engine, Effect highlight, boolean focusSearch){
 		this.engine = engine;
+		this.focusSearch = focusSearch;
 		
 		if(highlight != null){
 			textProperty().addListener(new SearchEffectChangeListener(engine, highlight));
-		}if(focusSearch){
-			setOnAction(new EventHandler<ActionEvent>() {
-				
-				@Override
-				public void handle(ActionEvent e) {
-					ArrayList<JSearchResult<NodeSearch>> res = AppSearchField.this.engine.query(getText().split(" "));
-					if(res.size() >= 1){
-						NodeSearch s = res.get(0).getValue();
-						s.prepare();
-						s.getNode().requestFocus();
-					}
-				}
-				
-			});
 		}
 	}
 	
 	public static AppSearchField make(Node root, Effect highlight, boolean focusSearch){
 		return new AppSearchField(new JSearchFX().createSearchEngine(root), highlight, focusSearch);
+	}
+
+	@Override
+	protected void searchOnChange(String newValue) {}
+
+	@Override
+	protected void searchOnAction(String text) {
+		if(focusSearch){
+			ArrayList<JSearchResult<NodeSearch>> res = AppSearchField.this.engine.query(text.split(" "));
+			if(res.size() >= 1){
+				NodeSearch s = res.get(0).getValue();
+				s.prepare();
+				s.getNode().requestFocus();
+			}
+		}
 	}
 
 	public JSearchEngine<NodeSearch> getEngine() {
