@@ -26,7 +26,7 @@ public class AutoComplete {
         this.entryMax = max;
     }
 
-    public void attach(TextInputControl in, JSearchEngine<String> completion){
+    public void attach(final TextInputControl in, final JSearchEngine<String> completion){
         in.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {

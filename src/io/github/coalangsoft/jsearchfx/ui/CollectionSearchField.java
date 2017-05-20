@@ -45,7 +45,7 @@ public class CollectionSearchField<T> extends SearchField<T>{
             return;
         }
         List<JSearchResult<T>> res = se.query(split);
-        prop.setValue(FXCollections.observableArrayList());
+        prop.setValue(FXCollections.<T>observableArrayList());
         for(int i = 0; i < res.size(); i++){
             prop.getValue().add(res.get(i).getValue());
         }

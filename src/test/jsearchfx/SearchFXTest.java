@@ -36,7 +36,7 @@ public class SearchFXTest extends Application{
 		SearchField<NodeSearch> search = AppSearchField.make(n, new SepiaTone(), true);
 		search.setPromptText("Suche");
 
-		JSearchEngine<String> autoComplete = new JSearchEngine<String>();
+		final JSearchEngine<String> autoComplete = new JSearchEngine<String>();
 		search.getEngine().forAllKeys(new Func<String, Object>() {
 			@Override
 			public Object call(String s) {

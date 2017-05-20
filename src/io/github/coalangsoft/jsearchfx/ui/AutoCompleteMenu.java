@@ -10,7 +10,7 @@ import javafx.scene.control.MenuItem;
  */
 public class AutoCompleteMenu extends MenuItem {
 
-    public AutoCompleteMenu(String value, Property<String> property) {
+    public AutoCompleteMenu(final String value, final Property<String> property) {
         super(value);
         setOnAction(new EventHandler<ActionEvent>() {
             @Override
