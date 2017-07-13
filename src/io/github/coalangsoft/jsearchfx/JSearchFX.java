@@ -4,9 +4,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TitledPane;
 
@@ -103,6 +105,11 @@ public class JSearchFX {
 			Object res = m.invoke(n);
 			if(res instanceof StringProperty){
 				engine.add(((StringProperty) res).get(), NodeSearch.create(n, tabData));
+			}else if(res instanceof Property){
+				Object v = ((Property<?>) res).getValue();
+				if(v instanceof Node){
+					registerNode((Node) v);
+				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e1) {}
