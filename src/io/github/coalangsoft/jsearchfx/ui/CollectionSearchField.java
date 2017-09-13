@@ -29,7 +29,7 @@ public class CollectionSearchField<T> extends SearchField<T>{
 
     @Override
     protected void searchOnChange(String newValue) {
-        if(onChange){
+        if(onChange && newValue != null){
             act(newValue.split("\\s+"));
         }
     }
