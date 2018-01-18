@@ -1,5 +1,6 @@
 package io.github.coalangsoft.jsearchfx.ui;
 
+import io.github.coalangsoft.jsearch.ISearchEngine;
 import io.github.coalangsoft.jsearch.JSearchEngine;
 import io.github.coalangsoft.jsearch.JSearchResult;
 import io.github.coalangsoft.jsearchfx.CollectionSearch;
@@ -16,7 +17,7 @@ import java.util.List;
 public class CollectionSearchField<T> extends SearchField<T>{
 
     private final ObservableList<T> orig;
-    private JSearchEngine<T> se;
+    private ISearchEngine<T> se;
     private final Property<ObservableList<T>> prop;
     private final boolean onChange;
 
@@ -52,12 +53,12 @@ public class CollectionSearchField<T> extends SearchField<T>{
     }
 
     @Override
-    public JSearchEngine<T> getEngine() {
+    public ISearchEngine<T> getEngine() {
         return se;
     }
 
     @Override
-    public void setEngine(JSearchEngine<T> engine) {
+    public void setEngine(ISearchEngine<T> engine) {
         se = engine;
     }
 }

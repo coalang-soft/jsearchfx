@@ -2,13 +2,18 @@ package test.jsearchfx;
 
 import java.io.File;
 
+import io.github.coalangsoft.jsearch.ISearchEngine;
 import io.github.coalangsoft.jsearch.JSearchEngine;
+import io.github.coalangsoft.jsearch.v2.BasicSearchEngine;
+import io.github.coalangsoft.jsearch.v2.SmartSearchEngine;
+import io.github.coalangsoft.jsearchfx.JSearchFX;
 import io.github.coalangsoft.jsearchfx.NodeSearch;
 import io.github.coalangsoft.jsearchfx.ui.AppSearchField;
 
 import io.github.coalangsoft.jsearchfx.ui.AutoComplete;
 import io.github.coalangsoft.jsearchfx.ui.CollectionSearchField;
 import io.github.coalangsoft.jsearchfx.ui.SearchField;
+import io.github.coalangsoft.jsearchfx.v2.JSearchFX2;
 import io.github.coalangsoft.lib.data.Func;
 import javafx.application.Application;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -33,19 +38,10 @@ public class SearchFXTest extends Application{
 	public void start(Stage stage) throws Exception {
 		Node n = FXMLLoader.load(new File("res/layout.fxml").toURI().toURL());
 
+		ISearchEngine<NodeSearch> engine = new JSearchFX().createSearchEngine(n);
+
 		SearchField<NodeSearch> search = AppSearchField.make(n, new SepiaTone(), true);
 		search.setPromptText("Suche");
-
-		final JSearchEngine<String> autoComplete = new JSearchEngine<String>();
-		search.getEngine().forAllKeys(new Func<String, Object>() {
-			@Override
-			public Object call(String s) {
-				autoComplete.add(s,s);
-				return null;
-			}
-		});
-
-		new AutoComplete().attach(search, autoComplete);
 
 		BorderPane t = new BorderPane(n);
 		t.setTop(search);

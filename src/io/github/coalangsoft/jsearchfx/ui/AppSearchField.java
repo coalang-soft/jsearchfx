@@ -2,12 +2,14 @@ package io.github.coalangsoft.jsearchfx.ui;
 
 import java.util.ArrayList;
 
+import io.github.coalangsoft.jsearch.ISearchEngine;
 import io.github.coalangsoft.jsearch.JSearchEngine;
 import io.github.coalangsoft.jsearch.JSearchResult;
 import io.github.coalangsoft.jsearchfx.JSearchFX;
 import io.github.coalangsoft.jsearchfx.NodeSearch;
 import io.github.coalangsoft.jsearchfx.SearchEffectChangeListener;
 
+import io.github.coalangsoft.jsearchfx.v2.JSearchFX2;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -17,9 +19,9 @@ import javafx.scene.effect.Effect;
 public class AppSearchField extends SearchField<NodeSearch>{
 
 	private final boolean focusSearch;
-	private JSearchEngine<NodeSearch> engine;
+	private ISearchEngine<NodeSearch> engine;
 
-	public AppSearchField(JSearchEngine<NodeSearch> engine, Effect highlight, boolean focusSearch){
+	public AppSearchField(ISearchEngine<NodeSearch> engine, Effect highlight, boolean focusSearch){
 		this.engine = engine;
 		this.focusSearch = focusSearch;
 		
@@ -30,6 +32,10 @@ public class AppSearchField extends SearchField<NodeSearch>{
 	
 	public static AppSearchField make(Node root, Effect highlight, boolean focusSearch){
 		return new AppSearchField(new JSearchFX().createSearchEngine(root), highlight, focusSearch);
+	}
+
+	public static AppSearchField makeV2(Node root, Effect highlight, boolean focusSearch){
+		return new AppSearchField(new JSearchFX2().createSearchEngine(root), highlight, focusSearch);
 	}
 
 	@Override
@@ -47,11 +53,11 @@ public class AppSearchField extends SearchField<NodeSearch>{
 		}
 	}
 
-	public JSearchEngine<NodeSearch> getEngine() {
+	public ISearchEngine<NodeSearch> getEngine() {
 		return engine;
 	}
 
-	public void setEngine(JSearchEngine<NodeSearch> engine) {
+	public void setEngine(ISearchEngine<NodeSearch> engine) {
 		this.engine = engine;
 	}
 	

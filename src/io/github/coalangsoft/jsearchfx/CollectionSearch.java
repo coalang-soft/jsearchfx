@@ -1,5 +1,6 @@
 package io.github.coalangsoft.jsearchfx;
 
+import io.github.coalangsoft.jsearch.ISearchEngine;
 import io.github.coalangsoft.jsearch.JSearchEngine;
 import io.github.coalangsoft.lib.data.Func;
 
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public class CollectionSearch {
 
-    public static <T> JSearchEngine<T> createEngine(List<T> list, Func<T, String> keyFactory){
+    public static <T> ISearchEngine<T> createEngine(List<T> list, Func<T, String> keyFactory){
         JSearchEngine<T> se = new JSearchEngine<T>();
         for(int i = 0; i < list.size(); i++){
             T item = list.get(i);

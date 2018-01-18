@@ -2,6 +2,7 @@ package io.github.coalangsoft.jsearchfx;
 
 import java.util.ArrayList;
 
+import io.github.coalangsoft.jsearch.ISearchEngine;
 import io.github.coalangsoft.jsearch.JSearchEngine;
 import io.github.coalangsoft.jsearch.JSearchResult;
 import javafx.beans.value.ChangeListener;
@@ -11,12 +12,12 @@ import javafx.util.Callback;
 
 public class SearchChangeListener implements ChangeListener<String>{
 
-	private JSearchEngine<NodeSearch> engine;
+	private ISearchEngine<NodeSearch> engine;
 	private Callback<JSearchResult<NodeSearch>, Void> onFind;
 	private ArrayList<JSearchResult<NodeSearch>> last;
 	private Callback<JSearchResult<NodeSearch>, Void> onRelease;
 	
-	public SearchChangeListener(JSearchEngine<NodeSearch> engine, Callback<JSearchResult<NodeSearch>, Void> onFind,
+	public SearchChangeListener(ISearchEngine<NodeSearch> engine, Callback<JSearchResult<NodeSearch>, Void> onFind,
 			Callback<JSearchResult<NodeSearch>, Void> onRelease){
 		this.engine = engine;
 		this.onFind = onFind;
